@@ -1,0 +1,11 @@
+steps:
+   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+     entrypoint: bash
+     args: [ './massage.sh', '$_REGION' ]
+   - name: 'gcr.io/cloud-builders/docker'
+     args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/builder', '.' ]
+images: ['$_REGION-docker.pkg.dev/${PROJECT_ID}/docker-builds/builder']
+timeout: 1800s
+substitutions:
+  _REGION: northamerica-northeast1
+  _BUILD_NAME: $_REGION-docker.pkg.dev/${_PROJECT_ID}/docker-builds/builder
