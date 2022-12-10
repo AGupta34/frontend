@@ -8,6 +8,10 @@ steps:
      name: 'gcr.io/cloud-builders/docker'
      args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend', '.' ]
      
+   - id: 'Push frontend Image'
+     name: 'gcr.io/cloud-builders/docker'
+     args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend']
+     
    - id: 'Deploy Frontend'
      name: gcr.io/cloud-builders/gcloud
      entrypoint: 'scripts/deploy.sh'
