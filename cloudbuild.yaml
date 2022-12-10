@@ -1,11 +1,31 @@
 steps:
-   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+   - id: 'Execute Configuration'
+     name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
      entrypoint: bash
      args: [ './massage.sh', '$_REGION' ]
-   - name: 'gcr.io/cloud-builders/docker'
-     args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/builder', '.' ]
-images: ['$_REGION-docker.pkg.dev/${PROJECT_ID}/docker-builds/builder']
+     
+   - id: 'Build Image'
+     name: 'gcr.io/cloud-builders/docker'
+     args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend', '.' ]
+     
+   - id: 'Deploy Frontend'
+     name: gcr.io/cloud-builders/gcloud
+    entrypoint: 'scripts/deploy.sh'
+    args: [ "frontend" ]
+    env:
+      - PROJECT_ID=${_PROJECT_ID}
+      - GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_TERRA_SA}
+      - IMAGE_NAME=${_IMAGE_BASE}frontend
+    waitFor:
+      - 'Build frontend Image'
+
+
+logsBucket: "gs://${_PROJECT_ID}-build-reports/build-logs/frontend"
+options:
+  logging: GCS_ONLY
 timeout: 1800s
 substitutions:
   _REGION: northamerica-northeast1
+  _IMAGE_BASE: $_REGION-docker.pkg.dev/${_PROJECT_ID}/docker-builds/
   _BUILD_NAME: $_REGION-docker.pkg.dev/${_PROJECT_ID}/docker-builds/builder
+  _TERRA_SA: sa-terraform@${_PROJECT_ID}.iam.gserviceaccount.com

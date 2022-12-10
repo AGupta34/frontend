@@ -10,16 +10,12 @@ gcloud config set project "${PROJECT_ID}"
 
 
 
-TAG_FORMATTED=$(echo "${BRANCH_TAG/./"-"}")
-TAG_FORMATTED=$(echo "${TAG_FORMATTED/./"-"}")
-
-echo "Deploying '$1' image ${IMAGE_NAME}, under tag ${TAG_FORMATTED} using SA ${GOOGLE_IMPERSONATE_SERVICE_ACCOUNT}"
+echo "Deploying '$1' image ${IMAGE_NAME}, using SA ${GOOGLE_IMPERSONATE_SERVICE_ACCOUNT}"
 gcloud run deploy "$1" \
         --image="${IMAGE_NAME}"  \
         --region=northamerica-northeast1 \
         --allow-unauthenticated \
-        --service-account="rapids-api-cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com"  \
-        --tag="${TAG_FORMATTED}" \
+        --service-account="cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com"  \
         --set-env-vars=PROJECT_ID=$PROJECT_ID
 
 
