@@ -6,7 +6,7 @@ steps:
      
    - id: 'Build Image'
      name: 'gcr.io/cloud-builders/docker'
-     args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/builder', '.' ]
+     args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend', '.' ]
      
    - id: 'Deploy Frontend'
      name: gcr.io/cloud-builders/gcloud
@@ -14,12 +14,10 @@ steps:
     args: [ "frontend" ]
     env:
       - PROJECT_ID=${_PROJECT_ID}
-      - BRANCH_TAG=${_BRANCH_TAG}
       - GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_TERRA_SA}
-      - IMAGE_NAME=${_IMAGE_BASE}login:${_BRANCH_TAG}
+      - IMAGE_NAME=${_IMAGE_BASE}frontend
     waitFor:
-      - 'Build login Image'
-
+      - 'Build frontend Image'
 
 
 logsBucket: "gs://${_PROJECT_ID}-build-reports/build-logs/frontend"
