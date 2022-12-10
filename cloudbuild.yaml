@@ -10,14 +10,14 @@ steps:
      
    - id: 'Deploy Frontend'
      name: gcr.io/cloud-builders/gcloud
-    entrypoint: 'scripts/deploy.sh'
-    args: [ "frontend" ]
-    env:
-      - PROJECT_ID=${_PROJECT_ID}
-      - GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_TERRA_SA}
-      - IMAGE_NAME=${_IMAGE_BASE}frontend
-    waitFor:
-      - 'Build frontend Image'
+     entrypoint: 'scripts/deploy.sh'
+     args: [ "frontend" ]
+     env:
+       - PROJECT_ID=${_PROJECT_ID}
+       - GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_TERRA_SA}
+       - IMAGE_NAME=${_IMAGE_BASE}frontend
+     waitFor:
+       - 'Build frontend Image'
 
 
 logsBucket: "gs://${_PROJECT_ID}-build-reports/build-logs/frontend"
