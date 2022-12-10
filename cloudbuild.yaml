@@ -4,7 +4,7 @@ steps:
      entrypoint: bash
      args: [ './massage.sh', '$_REGION' ]
      
-   - id: 'Build Image'
+   - id: 'Build frontend Image'
      name: 'gcr.io/cloud-builders/docker'
      args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend', '.' ]
      
