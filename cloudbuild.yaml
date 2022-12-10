@@ -26,6 +26,6 @@ options:
 timeout: 1800s
 substitutions:
   _REGION: northamerica-northeast1
-  _IMAGE_BASE: $_REGION-docker.pkg.dev/${_PROJECT_ID}/docker-builds/
-  _BUILD_NAME: $_REGION-docker.pkg.dev/${_PROJECT_ID}/docker-builds/builder
+  _IMAGE_BASE: northamerica-northeast1-docker.pkg.dev/${_PROJECT_ID}/docker-builds/
+  _BUILD_NAME: northamerica-northeast1-docker.pkg.dev/${_PROJECT_ID}/docker-builds/builder
   _TERRA_SA: sa-terraform@${_PROJECT_ID}.iam.gserviceaccount.com
