@@ -3,6 +3,8 @@ steps:
      name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
      entrypoint: bash
      args: [ './massage.sh', '$_REGION' ]
+     env:
+      - PROJECT_ID=${_PROJECT_ID}
      
    - id: 'Build frontend Image'
      name: 'gcr.io/cloud-builders/docker'
