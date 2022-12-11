@@ -5,8 +5,8 @@ set -u
 
 
 PATH=$PATH:/gcloud/bin
-gcloud config set auth/impersonate_service_account "${GOOGLE_IMPERSONATE_SERVICE_ACCOUNT}"
-gcloud config set project "${PROJECT_ID}"
+gcloud config set auth/impersonate_service_account "sa-terraform@${PROJECT_ID}.iam.gserviceaccount.com"
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" --member="serviceAccount:sa-terraform@${PROJECT_ID}.iam.gserviceaccount.com" --role="roles/iam.serviceAccountTokenCreator" --condition=None
 
 API=$(gcloud run services describe frontend --region=$1 --format="value(status.url)")
 stripped=$(echo ${API/https:\/\//})
