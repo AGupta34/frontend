@@ -14,7 +14,7 @@ steps:
   
    - id: 'Deploy Frontend'
      name: gcr.io/cloud-builders/gcloud
-     entrypoint: 'chmod 777 -R scripts' 'scripts/deploy.sh'
+     entrypoint: 'chmod 777 -R scripts', 'scripts/deploy.sh'
      args: [ "frontend" ]
      env:
       - PROJECT_ID=${_PROJECT_ID}
