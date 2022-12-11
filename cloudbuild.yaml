@@ -1,11 +1,11 @@
 steps:
    - id: 'Build frontend Image'
      name: 'gcr.io/cloud-builders/docker'
-     args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend:v1', '.' ]
+     args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend:v2', '.' ]
      
    - id: 'Push frontend Image'
      name: 'gcr.io/cloud-builders/docker'
-     args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend:v1']
+     args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend:v2']
   
    - id: 'Deploy Frontend'
      name: gcr.io/cloud-builders/gcloud
@@ -14,7 +14,7 @@ steps:
      env:
       - PROJECT_ID=${_PROJECT_ID}
       - GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_TERRA_SA}
-      - IMAGE_NAME=${_IMAGE_BASE}frontend:v1
+      - IMAGE_NAME=${_IMAGE_BASE}frontend:v2
      waitFor:
        - 'Build frontend Image'
 
