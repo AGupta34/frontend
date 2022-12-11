@@ -11,18 +11,17 @@ steps:
    - id: 'Push frontend Image'
      name: 'gcr.io/cloud-builders/docker'
      args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend:v1']
-     
-  /* - id: 'Deploy Frontend'
-     name: gcr.io/cloud-builders/gcloud
-     entrypoint: 'scripts/deploy.sh'
-     args: [ "frontend" ]
-     env:
-       - PROJECT_ID=${_PROJECT_ID}
-       - GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_TERRA_SA}
-       - IMAGE_NAME=${_IMAGE_BASE}frontend
-     waitFor:
-       - 'Build frontend Image'
-*/
+  
+  # - id: 'Deploy Frontend'
+  #   name: gcr.io/cloud-builders/gcloud
+  #   entrypoint: 'scripts/deploy.sh'
+  #   args: [ "frontend" ]
+  #  env:
+   #    - PROJECT_ID=${_PROJECT_ID}
+    #   - GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_TERRA_SA}
+     #  - IMAGE_NAME=${_IMAGE_BASE}frontend
+    # waitFor:
+     #  - 'Build frontend Image'
 
 logsBucket: "gs://${_PROJECT_ID}-build-reports/build-logs/frontend"
 options:
