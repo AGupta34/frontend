@@ -6,11 +6,11 @@ steps:
      
    - id: 'Build frontend Image'
      name: 'gcr.io/cloud-builders/docker'
-     args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend', '.' ]
+     args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend:v1', '.' ]
      
    - id: 'Push frontend Image'
      name: 'gcr.io/cloud-builders/docker'
-     args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend:latest']
+     args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/docker-builds/frontend:v1']
      
    - id: 'Deploy Frontend'
      name: gcr.io/cloud-builders/gcloud
