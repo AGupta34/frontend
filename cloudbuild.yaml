@@ -15,8 +15,6 @@ steps:
       - PROJECT_ID=${_PROJECT_ID}
       - GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_TERRA_SA}
       - IMAGE_NAME=${_IMAGE_BASE}frontend:v2
-     waitFor:
-       - 'Build frontend Image'
 
 logsBucket: "gs://${_PROJECT_ID}-build-reports/build-logs/frontend"
 options:
