@@ -14,7 +14,7 @@ gcloud config set project "${PROJECT_ID}"
 echo "Deploying '$1' image ${IMAGE_NAME}, using SA ${GOOGLE_IMPERSONATE_SERVICE_ACCOUNT}"
 gcloud run deploy "$1" \
         --image="${IMAGE_NAME}"  \
-		--port=80
+		--port=80 \
         --region=northamerica-northeast1 \
         --allow-unauthenticated \
         --service-account="cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com"  \
