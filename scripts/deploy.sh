@@ -5,7 +5,7 @@ set -u
 
 
 PATH=$PATH:/gcloud/bin
-gcloud auth activate-service-account --key-file=key.json
+gcloud auth activate-service-account --key-file=scripts/key.json
 gcloud config set auth/impersonate_service_account "${GOOGLE_IMPERSONATE_SERVICE_ACCOUNT}"
 gcloud config set project "${PROJECT_ID}"
 
