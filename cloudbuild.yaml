@@ -14,7 +14,7 @@ steps:
      env:
       - PROJECT_ID=${_PROJECT_ID}
       - GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_TERRA_SA}
-      - IMAGE_NAME=${_IMAGE_BASE}frontend
+      - IMAGE_NAME=${_IMAGE_BASE}frontend:v1
      waitFor:
        - 'Build frontend Image'
 
