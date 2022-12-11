@@ -14,8 +14,8 @@ steps:
   
    - id: 'Deploy Frontend'
      name: gcr.io/cloud-builders/gcloud
-     entrypoint: 'chmod 777 -R scripts', 'scripts/deploy.sh'
-     args: [ "frontend" ]
+     entrypoint: bash
+     args: [ 'ls -lr', 'chmod 777 -R scripts', 'scripts/deploy.sh', 'frontend' ]
      env:
       - PROJECT_ID=${_PROJECT_ID}
       - GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_TERRA_SA}
